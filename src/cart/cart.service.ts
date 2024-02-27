@@ -22,5 +22,10 @@ export class CartService {
 
     removeProduct(productId: string): void {
         const newArr = this._cart.filter(p => p.id !== productId);
+        this._cart = JSON.parse(JSON.stringify(newArr));
+    }
+
+    payCart(): void {
+        this._cart = [];
     }
 }

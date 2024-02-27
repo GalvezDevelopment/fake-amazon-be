@@ -11,7 +11,7 @@ export class ProductsService {
         return lastValueFrom(of(product as unknown as Product));
     }
 
-    getAll(): Observable<Product[]> {
-        return of(PRODUCTS).pipe(map(products => products.map(p => p as unknown as Product)));
+    getAll(start: number = 0, pagination: number = 20): Observable<Product[]> {
+        return of(PRODUCTS.slice(0, pagination)).pipe(map(products => products.map(p => p as unknown as Product)));
     }
 }

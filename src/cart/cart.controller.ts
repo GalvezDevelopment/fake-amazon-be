@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Query } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { Product } from 'src/products/interfaces/product.interface/product.interface';
 import { CartService } from './cart.service';
@@ -18,5 +18,15 @@ export class CartController {
     @Get()
     getAll(): Observable<Product[]> {
         return this._cart.getUserCart();
+    }
+
+    @Post('checkout')
+    pay(@Body() user: { userId: string }): void {
+        return this._cart.payCart();
+    }
+
+    @Delete(':id')
+    deleteProduct(@Param('id') productId: string): void {
+        this._cart.removeProduct(productId);
     }
 }
